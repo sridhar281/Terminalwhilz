@@ -1,5 +1,6 @@
 from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
+from vector import retreival
 
 model=OllamaLLM(model="llama3.2")
 template= """You are an expert in answering questions about the restaurant
@@ -15,5 +16,6 @@ while True:
     if question=="q":
         break 
     
+    reviews=retreival.invoke({"query":question})
     result=chain.invoke({"reviews":[],"question":question})
     print(result)
